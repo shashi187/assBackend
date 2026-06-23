@@ -5,7 +5,9 @@ import cors from 'cors';
 import productRoutes from './src/routes/products.js';
 
 const app = express();
-app.use(cors());
+app.use(cors({
+    origin:'*'
+}));
 app.use(express.json());
 
 app.use('/api/products', productRoutes);
