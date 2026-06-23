@@ -3,12 +3,17 @@ dotenv.config();
 import express from 'express';
 import cors from 'cors';
 import productRoutes from './src/routes/products.js';
+import { fileURLToPath } from 'url';
+import { dirname, join } from 'path';
 
-const app = express();
-app.use(cors({
-    origin:'*'
-}));
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = dirname(__filename);
+
+const app = express();  //  create app
+
+app.use(cors({ origin: '*' }));
 app.use(express.json());
+app.use(express.static(join(__dirname, 'public')));  // ← then use it
 
 app.use('/api/products', productRoutes);
 
